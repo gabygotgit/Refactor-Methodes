@@ -1,5 +1,6 @@
 # Journal de refactoring
-# modif demo
-| Classe/méthode | Problème observé | Refactoring appliqué | Justification |
-|---|---|---|---|
-| | | | |
+| Classe/méthode                                   | Problème observé                           | Refactoring appliqué                                                                                    | Justification                                                                                                                                                                                    |
+|--------------------------------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| PricingService -> les méthodes "increaseBy...()" | Méthodes presques identiques, répétitives. | Complètement enlever ces trois méthodes et en implémanter une meilleure, comme "increaseByPercentage(). | À quoi servaient même ces méthodes. Je suis un peu confuse car j'ai l'impression que de toute manière, tous les cargo "hazardous", augmente le prix de 20%.. alors pourquoi ces trois méthodes?? |
+| ManifestRepositery -> count()                    | Elle n'a pas besoin d'être publique.       | J'ai tout simplement modifier sa visibilité à "private".                                                | Des méthodes non utilisées en dehors de sa classe doivent être privées. Question de respecter l'encapsulation.
+| PermissionService -> canCarryHazardous() | Méthode trop longue, introduit une trop longue liste de cas. | J'ai extrait la méthode "hasPermission()" de canCarryHazardous()". | Afin que canCarryHazardous() n'aille pas trop de responsabilité et améliorer la lisibilité du  code.

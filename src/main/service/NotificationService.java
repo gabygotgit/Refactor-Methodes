@@ -7,3 +7,5 @@ public class NotificationService {
         return "CONFIRMATION " + shipment.getReference() + " -> " + shipment.getCustomer().getName();
     }
 }
+
+// rien à voir ici

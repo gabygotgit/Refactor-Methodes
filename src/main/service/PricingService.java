@@ -6,9 +6,6 @@ import main.domain.Planet;
 import java.time.LocalDate;
 
 public class PricingService {
-    public double increaseByFivePercent(double price) { return price + price * 0.05; }
-    public double increaseByTenPercent(double price) { return price + price * 0.10; }
-    public double increaseByTwentyPercent(double price) { return price + price * 0.20; }
 
     public double calculatePrice(double weight, double declaredValue, boolean hazardous,
                                  String originName, String originSector, int originSecurity,
@@ -17,7 +14,9 @@ public class PricingService {
                                  LocalDate departureDate) {
         double result = weight * 2.25;
         if (declaredValue > 10000) result += declaredValue * 0.015;
-        if (hazardous) result = increaseByTwentyPercent(result);
+        if (hazardous) {
+            result = increaseByPercentage(result, 0.20);
+        }
         if (originSecurity >= 4 || destinationSecurity >= 4) result += 125;
         if (!originSector.equals(destinationSector)) result += 80;
         if (departureDate.getMonthValue() == 12 || departureDate.getMonthValue() <= 2) result += 45;
@@ -47,5 +46,9 @@ public class PricingService {
 
     public Object pricingSummary(double total) {
         return total >= 2000 ? "PRIORITY" : "REGULAR";
+    }
+
+    private double increaseByPercentage (double price, double percentage) {
+        return price * (1 + percentage);
     }
 }
